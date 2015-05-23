@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 
 trainingimages
+datasets
 
 # for the emacs temp files
 *~

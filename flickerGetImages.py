@@ -10,7 +10,7 @@ request = "https://api.flickr.com/services/rest/?"
 #                'per_page': 30,privacy_filter=1,
 #                'api_key': 'bb172cc50015aa36d7354a3a2ec84dde'}
 
-start_year = 1900
+start_year = 1914
 end_year = 2000
 
 for year in range(start_year,end_year):
