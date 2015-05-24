@@ -1,0 +1,40 @@
+
+!obj:pylearn2.train.Train {
+
+    dataset: &train !pkl: "timeliner_preprocessed_train.pkl",
+
+    model: !obj:pylearn2.models.softmax_regression.SoftmaxRegression {
+    
+        nvis : 3072,
+        n_classes: 100,
+
+        # The elements of the weight matrices of the RBM will be drawn
+        # independently from U(-0.05, 0.05)
+        irange : 0.0,
+    },
+
+    # Next we need to specify the training algorithm that will be used to train
+    # the model.  Here we use stochastic gradient descent.
+
+    algorithm: !obj:pylearn2.training_algorithms.bgd.BGD {
+        # Each gradient step will be based on this many examples
+        batch_size : 1000,
+
+        monitoring_dataset : !pkl: "timeliner_preprocessed_train.pkl",
+
+        termination_criterion : !obj:pylearn2.termination_criteria.MonitorBased {
+             channel_name: 'valid_y_misclass'
+        },
+
+        },
+    extensions : [!obj:pylearn2.train_extensions.best_params.MonitorBasedSaveBest {
+
+    channel_name: 'valid_y_misclass',
+    save_path: 'softmax_regression_best.pkl'
+}],
+    #Finally, request that the model be saved after each epoch
+    save_freq : 1,
+    save_path : 'softmax_regression.pkl'
+}
+
+
