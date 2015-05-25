@@ -23,7 +23,7 @@ def array_from_test_image(filename):
     return images
 
 
-model_path = 'timeliner_grbm_smd.pkl'
+model_path = 'cifar_grbm_smd.pkl'
 model = serial.load(model_path)
 
 X = model.get_input_space().make_theano_batch()
